@@ -1,0 +1,700 @@
+{
+  "generatedAt": "2026-09-17T18:23:30.427Z",
+  "mode": "llm",
+  "guideAnswers": [
+    {
+      "questionId": "q1",
+      "question": "How would you describe current adoption of robotic surgery in your market?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "Adoption is growing, but it remains concentrated in larger academic hospitals and private centres with stronger capital budgets. Smaller regional hospitals are much slower to adopt robotic surgery.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "00:18",
+          "quote": "Adoption is growing, but it is still concentrated in larger academic hospitals and private centres with stronger capital budgets. Smaller regional hospitals are much slower.",
+          "utteranceId": "france-1",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q1",
+      "question": "How would you describe current adoption of robotic surgery in your market?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "Adoption is growing but uneven; large university hospitals are advanced while many smaller hospitals are still waiting.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "00:16",
+          "quote": "It is growing, but adoption is quite uneven. Large university hospitals are much more advanced, while many smaller hospitals are still waiting.",
+          "utteranceId": "germany-1",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q1",
+      "question": "How would you describe current adoption of robotic surgery in your market?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "00:14",
+          "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+          "utteranceId": "uk-1",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "04:06",
+          "quote": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+          "utteranceId": "uk-9",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q2",
+      "question": "What are the main barriers to adoption?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "The biggest barrier is still capital budget approval. Hospitals may like the technology clinically, but purchasing committees need a strong economic case before approving a system.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "01:20",
+          "quote": "The biggest issue is still capital budget approval. Hospitals may like the technology clinically, but purchasing committees need a strong economic case before approving a system.",
+          "utteranceId": "france-3",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q2",
+      "question": "What are the main barriers to adoption?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "The main barriers are cost and proving sufficient usage of the system.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "01:10",
+          "quote": "Cost is the first barrier. These are large capital purchases, and hospital finances are under pressure. The second issue is proving that the system will be used enough.",
+          "utteranceId": "germany-3",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q2",
+      "question": "What are the main barriers to adoption?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "00:14",
+          "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+          "utteranceId": "uk-1",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "04:06",
+          "quote": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+          "utteranceId": "uk-9",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q3",
+      "question": "How important are hospital budgets and ROI in purchasing decisions?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "Hospital budgets and ROI are critical. The finance team wants to understand utilisation, procedure volume, maintenance cost and whether the system will actually pay for itself.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "02:18",
+          "quote": "Very important. The clinical argument may get surgeons interested, but the finance team wants to understand utilisation, procedure volume, maintenance cost and whether the system will actually pay for itself.",
+          "utteranceId": "france-5",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q3",
+      "question": "How important are hospital budgets and ROI in purchasing decisions?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "Hospital budgets and ROI are crucial; the economic case determines approval.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "02:08",
+          "quote": "We look at total cost of ownership, expected procedure volume, maintenance, service contracts and training requirements. A strong clinical case helps, but the economic case decides whether it gets approved.",
+          "utteranceId": "germany-5",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q3",
+      "question": "How important are hospital budgets and ROI in purchasing decisions?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "I would say economics and clinical strategy are balanced. I would not say finance alone decides the purchase.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "03:10",
+          "quote": "I would say economics and clinical strategy are balanced. I would not say finance alone decides the purchase.",
+          "utteranceId": "uk-7",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "02:07",
+          "quote": "It matters, but the discussion is not always purely financial. Hospitals also consider patient outcomes, length of stay, surgeon recruitment and whether the technology improves their clinical position.",
+          "utteranceId": "uk-5",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q4",
+      "question": "How important are surgeon training and clinical outcomes?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "Training is essential, especially in the first year; if only one surgeon can use the system, economics become difficult, so hospitals want several surgeons trained to achieve high utilisation. Clinical outcomes are necessary but not enough on their own; when outcomes are similar, hospitals focus on economics and utilisation.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "03:10",
+          "quote": "Training matters, especially in the first year. If only one surgeon can use the system, the economics become difficult. Hospitals want several surgeons trained so utilisation is high enough.",
+          "utteranceId": "france-7",
+          "verified": true
+        },
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "04:08",
+          "quote": "Clinical outcomes are necessary, but they are not enough on their own. If two systems offer similar outcomes, the hospital will look hard at economics and utilisation.",
+          "utteranceId": "france-9",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q4",
+      "question": "How important are surgeon training and clinical outcomes?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "Surgeon training and comfort are very important; low utilisation weakens the business case.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "03:05",
+          "quote": "Very important operationally. If the hospital buys a system but only one surgeon is comfortable using it, utilisation will be poor. That weakens the business case.",
+          "utteranceId": "germany-7",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q4",
+      "question": "How important are surgeon training and clinical outcomes?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "Funding is important, but I would say training capacity is just as important. You can buy a system, but if you cannot train enough surgeons and theatre staff, adoption stalls.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "01:05",
+          "quote": "Funding is important, but I would say training capacity is just as important. You can buy a system, but if you cannot train enough surgeons and theatre staff, adoption stalls.",
+          "utteranceId": "uk-3",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "02:07",
+          "quote": "It matters, but the discussion is not always purely financial. Hospitals also consider patient outcomes, length of stay, surgeon recruitment and whether the technology improves their clinical position.",
+          "utteranceId": "uk-5",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q5",
+      "question": "What adoption trend do you expect over the next 3–5 years?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "I expect adoption to continue increasing, probably steadily rather than explosively. In stronger centres, there may be 15 to 20 percent more procedures annually, while smaller hospitals will remain slower.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "05:07",
+          "quote": "I expect adoption to continue increasing, probably steadily rather than explosively. I would expect maybe 15 to 20 percent more procedures annually in some of the stronger centres, but smaller hospitals will remain slower.",
+          "utteranceId": "france-11",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q5",
+      "question": "What adoption trend do you expect over the next 3–5 years?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "Growth will be gradual, likely high single digits to low double digits in procedure volumes over the next 3–5 years.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "04:09",
+          "quote": "Yes, but I would not expect a dramatic jump. I think growth will be gradual, especially because many hospitals have other competing capital priorities.",
+          "utteranceId": "germany-9",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q5",
+      "question": "What adoption trend do you expect over the next 3–5 years?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "04:06",
+          "quote": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+          "utteranceId": "uk-9",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "00:14",
+          "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+          "utteranceId": "uk-1",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q6",
+      "question": "What is the typical hospital decision-making timeline for purchasing a new robotic system?",
+      "expertId": "france",
+      "expertName": "Dr. Jean Martin",
+      "market": "France",
+      "answer": "Once a hospital becomes serious, the decision-making timeline is typically six to twelve months. It can be longer if the capital committee pushes the purchase into the next budget cycle.",
+      "citations": [
+        {
+          "expertId": "france",
+          "expertName": "Dr. Jean Martin",
+          "market": "France",
+          "timestamp": "06:08",
+          "quote": "Six to twelve months is realistic once the hospital becomes serious. It can be longer if the capital committee pushes the purchase into the next budget cycle.",
+          "utteranceId": "france-13",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q6",
+      "question": "What is the typical hospital decision-making timeline for purchasing a new robotic system?",
+      "expertId": "germany",
+      "expertName": "Anna Keller",
+      "market": "Germany",
+      "answer": "The typical decision-making timeline is nine to eighteen months.",
+      "citations": [
+        {
+          "expertId": "germany",
+          "expertName": "Anna Keller",
+          "market": "Germany",
+          "timestamp": "06:05",
+          "quote": "Nine to eighteen months is common. Procurement, clinical leadership, finance and management all need to align, so it can move slowly.",
+          "utteranceId": "germany-13",
+          "verified": true
+        }
+      ],
+      "confidence": "high",
+      "evidenceFound": true
+    },
+    {
+      "questionId": "q6",
+      "question": "What is the typical hospital decision-making timeline for purchasing a new robotic system?",
+      "expertId": "uk",
+      "expertName": "Dr. Emily Carter",
+      "market": "United Kingdom",
+      "answer": "Around six to nine months can happen if funding is already available. If the trust has to wait for a new capital cycle, it can take much longer.",
+      "citations": [
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "05:04",
+          "quote": "Around six to nine months can happen if funding is already available. If the trust has to wait for a new capital cycle, it can take much longer.",
+          "utteranceId": "uk-11",
+          "verified": true
+        },
+        {
+          "expertId": "uk",
+          "expertName": "Dr. Emily Carter",
+          "market": "United Kingdom",
+          "timestamp": "00:14",
+          "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+          "utteranceId": "uk-1",
+          "verified": true
+        }
+      ],
+      "confidence": "medium",
+      "evidenceFound": true
+    }
+  ],
+  "crossAnalysis": {
+    "themes": [
+      {
+        "theme": "Uneven adoption across hospital types",
+        "summary": "All three experts describe growth that is concentrated in larger/academic or better-funded centres, with smaller hospitals lagging.",
+        "supportingExperts": [
+          "france",
+          "germany",
+          "uk"
+        ],
+        "citations": [
+          {
+            "expertId": "france",
+            "expertName": "Dr. Jean Martin",
+            "market": "France",
+            "timestamp": "00:18",
+            "quote": "Adoption is growing, but it is still concentrated in larger academic hospitals and private centres with stronger capital budgets. Smaller regional hospitals are much slower.",
+            "utteranceId": "france-1",
+            "verified": true
+          },
+          {
+            "expertId": "germany",
+            "expertName": "Anna Keller",
+            "market": "Germany",
+            "timestamp": "00:16",
+            "quote": "It is growing, but adoption is quite uneven. Large university hospitals are much more advanced, while many smaller hospitals are still waiting.",
+            "utteranceId": "germany-1",
+            "verified": true
+          },
+          {
+            "expertId": "uk",
+            "expertName": "Dr. Emily Carter",
+            "market": "United Kingdom",
+            "timestamp": "00:14",
+            "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+            "utteranceId": "uk-1",
+            "verified": true
+          }
+        ]
+      },
+      {
+        "theme": "Utilisation and training underpin economics",
+        "summary": "Experts link sustainable programmes to training enough surgeons/staff and achieving sufficient procedure volume.",
+        "supportingExperts": [
+          "france",
+          "germany",
+          "uk"
+        ],
+        "citations": [
+          {
+            "expertId": "france",
+            "expertName": "Dr. Jean Martin",
+            "market": "France",
+            "timestamp": "01:20",
+            "quote": "The biggest issue is still capital budget approval. Hospitals may like the technology clinically, but purchasing committees need a strong economic case before approving a system.",
+            "utteranceId": "france-3",
+            "verified": true
+          },
+          {
+            "expertId": "germany",
+            "expertName": "Anna Keller",
+            "market": "Germany",
+            "timestamp": "01:10",
+            "quote": "Cost is the first barrier. These are large capital purchases, and hospital finances are under pressure. The second issue is proving that the system will be used enough.",
+            "utteranceId": "germany-3",
+            "verified": true
+          },
+          {
+            "expertId": "uk",
+            "expertName": "Dr. Emily Carter",
+            "market": "United Kingdom",
+            "timestamp": "00:14",
+            "quote": "Adoption is increasing, and in some larger NHS trusts robotic surgery is becoming standard for selected procedures. But access still varies significantly by hospital.",
+            "utteranceId": "uk-1",
+            "verified": true
+          }
+        ]
+      }
+    ],
+    "disagreements": [
+      {
+        "topic": "Weight of economics vs clinical strategy in purchase decisions",
+        "summary": "France and Germany emphasise finance/ROI as decisive; the UK expert describes a more balanced economics + clinical-strategy decision.",
+        "positions": [
+          {
+            "expertId": "france",
+            "expertName": "Dr. Jean Martin",
+            "market": "France",
+            "stance": "Hospital budgets and ROI are critical. The finance team wants to understand utilisation, procedure volume, maintenance cost and whether the system will actually pay for itself.",
+            "citations": [
+              {
+                "expertId": "france",
+                "expertName": "Dr. Jean Martin",
+                "market": "France",
+                "timestamp": "02:18",
+                "quote": "Very important. The clinical argument may get surgeons interested, but the finance team wants to understand utilisation, procedure volume, maintenance cost and whether the system will actually pay for itself.",
+                "utteranceId": "france-5",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "germany",
+            "expertName": "Anna Keller",
+            "market": "Germany",
+            "stance": "Hospital budgets and ROI are crucial; the economic case determines approval.",
+            "citations": [
+              {
+                "expertId": "germany",
+                "expertName": "Anna Keller",
+                "market": "Germany",
+                "timestamp": "02:08",
+                "quote": "We look at total cost of ownership, expected procedure volume, maintenance, service contracts and training requirements. A strong clinical case helps, but the economic case decides whether it gets approved.",
+                "utteranceId": "germany-5",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "uk",
+            "expertName": "Dr. Emily Carter",
+            "market": "United Kingdom",
+            "stance": "I would say economics and clinical strategy are balanced. I would not say finance alone decides the purchase.",
+            "citations": [
+              {
+                "expertId": "uk",
+                "expertName": "Dr. Emily Carter",
+                "market": "United Kingdom",
+                "timestamp": "03:10",
+                "quote": "I would say economics and clinical strategy are balanced. I would not say finance alone decides the purchase.",
+                "utteranceId": "uk-7",
+                "verified": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "topic": "Expected growth over 3–5 years",
+        "summary": "France cites ~15–20% procedure growth in stronger centres; Germany expects high-single/low-double digits market-wide; UK is more bullish if training and cost improve.",
+        "positions": [
+          {
+            "expertId": "france",
+            "expertName": "Dr. Jean Martin",
+            "market": "France",
+            "stance": "I expect adoption to continue increasing, probably steadily rather than explosively. In stronger centres, there may be 15 to 20 percent more procedures annually, while smaller hospitals will remain slower.",
+            "citations": [
+              {
+                "expertId": "france",
+                "expertName": "Dr. Jean Martin",
+                "market": "France",
+                "timestamp": "05:07",
+                "quote": "I expect adoption to continue increasing, probably steadily rather than explosively. I would expect maybe 15 to 20 percent more procedures annually in some of the stronger centres, but smaller hospitals will remain slower.",
+                "utteranceId": "france-11",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "germany",
+            "expertName": "Anna Keller",
+            "market": "Germany",
+            "stance": "Growth will be gradual, likely high single digits to low double digits in procedure volumes over the next 3–5 years.",
+            "citations": [
+              {
+                "expertId": "germany",
+                "expertName": "Anna Keller",
+                "market": "Germany",
+                "timestamp": "04:09",
+                "quote": "Yes, but I would not expect a dramatic jump. I think growth will be gradual, especially because many hospitals have other competing capital priorities.",
+                "utteranceId": "germany-9",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "uk",
+            "expertName": "Dr. Emily Carter",
+            "market": "United Kingdom",
+            "stance": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+            "citations": [
+              {
+                "expertId": "uk",
+                "expertName": "Dr. Emily Carter",
+                "market": "United Kingdom",
+                "timestamp": "04:06",
+                "quote": "I am quite positive. I think adoption could accelerate if training expands and systems become more cost competitive. I could see procedure growth above 15 percent annually in some areas.",
+                "utteranceId": "uk-9",
+                "verified": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "topic": "Purchase decision timeline",
+        "summary": "Reported timelines differ: UK ~6–9 months when funding exists; France ~6–12 months; Germany commonly ~9–18 months.",
+        "positions": [
+          {
+            "expertId": "france",
+            "expertName": "Dr. Jean Martin",
+            "market": "France",
+            "stance": "Once a hospital becomes serious, the decision-making timeline is typically six to twelve months. It can be longer if the capital committee pushes the purchase into the next budget cycle.",
+            "citations": [
+              {
+                "expertId": "france",
+                "expertName": "Dr. Jean Martin",
+                "market": "France",
+                "timestamp": "06:08",
+                "quote": "Six to twelve months is realistic once the hospital becomes serious. It can be longer if the capital committee pushes the purchase into the next budget cycle.",
+                "utteranceId": "france-13",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "germany",
+            "expertName": "Anna Keller",
+            "market": "Germany",
+            "stance": "The typical decision-making timeline is nine to eighteen months.",
+            "citations": [
+              {
+                "expertId": "germany",
+                "expertName": "Anna Keller",
+                "market": "Germany",
+                "timestamp": "06:05",
+                "quote": "Nine to eighteen months is common. Procurement, clinical leadership, finance and management all need to align, so it can move slowly.",
+                "utteranceId": "germany-13",
+                "verified": true
+              }
+            ]
+          },
+          {
+            "expertId": "uk",
+            "expertName": "Dr. Emily Carter",
+            "market": "United Kingdom",
+            "stance": "Around six to nine months can happen if funding is already available. If the trust has to wait for a new capital cycle, it can take much longer.",
+            "citations": [
+              {
+                "expertId": "uk",
+                "expertName": "Dr. Emily Carter",
+                "market": "United Kingdom",
+                "timestamp": "05:04",
+                "quote": "Around six to nine months can happen if funding is already available. If the trust has to wait for a new capital cycle, it can take much longer.",
+                "utteranceId": "uk-11",
+                "verified": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,23 @@
+# Root
+.DS_Store
+*.pem
+*.log
+
+# Dependencies / build
+web/node_modules/
+web/.next/
+web/out/
+web/build/
+web/.cache/
+web/.vercel/
+web/*.tsbuildinfo
+web/next-env.d.ts
+
+# Secrets
+web/.env
+web/.env.local
+**/.env*
+!**/.env.example
+
+# OS
+Thumbs.db
