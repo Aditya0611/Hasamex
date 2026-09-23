@@ -5,7 +5,7 @@ import {
   findInterviewFollowUps,
 } from "@/lib/analysis";
 import { loadCaseData } from "@/lib/load";
-import { retrieveRelevantHybrid } from "@/lib/retrieve";
+import { isCaseRelevantQuestion, retrieveRelevantHybrid } from "@/lib/retrieve";
 import { citationFromUtterance, buildVerifiedCitation } from "@/lib/verify";
 import type { Citation, ExpertId } from "@/lib/types";
 import { getExpertMeta } from "@/lib/load";
@@ -22,6 +22,9 @@ export const transcriptAgentTools = {
       question: z.string().describe("The user question to match"),
     }),
     execute: async ({ question }) => {
+      if (!isCaseRelevantQuestion(question)) {
+        return { found: false, pairs: [] as const };
+      }
       const data = loadCaseData();
       const pairs = findInterviewFollowUps(data.utterances, question);
       if (pairs.length === 0) {
@@ -63,6 +66,9 @@ export const transcriptAgentTools = {
       topK: z.number().min(1).max(8).optional(),
     }),
     execute: async ({ query, expertId, topK }) => {
+      if (!isCaseRelevantQuestion(query)) {
+        return { found: false, mode: "hybrid_semantic", hits: [] as const };
+      }
       const data = loadCaseData();
       const hits = await retrieveRelevantHybrid(data.utterances, query, {
         expertId: expertId as ExpertId | undefined,

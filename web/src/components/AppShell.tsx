@@ -134,9 +134,6 @@ export function AppShell() {
 
   function openTab(next: Tab) {
     setTab(next);
-    if (next === "ask" && !askResult && !asking) {
-      void runAsk();
-    }
   }
 
   function jumpToCitation(citation: Citation) {
@@ -346,7 +343,10 @@ export function AppShell() {
             </p>
             <textarea
               value={askInput}
-              onChange={(e) => setAskInput(e.target.value)}
+              onChange={(e) => {
+                setAskInput(e.target.value);
+                setAskResult(null);
+              }}
               rows={3}
               placeholder="Ask a question across France, Germany, and UK calls…"
             />
@@ -364,8 +364,12 @@ export function AppShell() {
             {askResult ? (
               <article className="answer-block">
                 <p className="answer-text">{askResult.answer}</p>
-                <h4>Citations</h4>
-                <CitationList citations={askResult.citations} onJump={jumpToCitation} />
+                {askResult.citations.length > 0 ? (
+                  <>
+                    <h4>Citations</h4>
+                    <CitationList citations={askResult.citations} onJump={jumpToCitation} />
+                  </>
+                ) : null}
               </article>
             ) : null}
           </section>

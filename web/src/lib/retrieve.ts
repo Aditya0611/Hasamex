@@ -145,12 +145,67 @@ export function tokenize(text: string): string[] {
     .filter((t) => t.length > 1 && !STOPWORDS.has(t));
 }
 
+const CASE_TERMS = new Set([
+  "adoption",
+  "adopt",
+  "robotic",
+  "robot",
+  "surgery",
+  "surgical",
+  "hospital",
+  "hospitals",
+  "surgeon",
+  "surgeons",
+  "barrier",
+  "barriers",
+  "budget",
+  "budgets",
+  "roi",
+  "training",
+  "outcome",
+  "outcomes",
+  "clinical",
+  "timeline",
+  "purchase",
+  "procurement",
+  "economic",
+  "economics",
+  "cost",
+  "costs",
+  "capital",
+  "nhs",
+  "france",
+  "germany",
+  "uk",
+  "market",
+  "expert",
+  "transcript",
+  "utilisation",
+  "utilization",
+  "trend",
+  "outlook",
+]);
+
+const SMALLTALK =
+  /^(hi|hello|hey|yo|sup|thanks|thank you|how are you|how r you|how're you|what's up|whats up|who are you|good morning|good evening|good night|ok|okay|test)[\s!.?]*$/i;
+
 /** True when the question has enough real content words to search safely. */
 export function hasSearchableQuestion(question: string): boolean {
   const tokens = tokenize(question);
   if (tokens.length >= 2) return true;
   // Allow a single strong topic word (e.g. "barriers", "ROI", "timeline")
   return tokens.length === 1 && tokens[0].length >= 5;
+}
+
+/** False for greetings / off-topic asks that must not retrieve random quotes. */
+export function isCaseRelevantQuestion(question: string): boolean {
+  const q = question.trim();
+  if (!q || SMALLTALK.test(q)) return false;
+  if (!hasSearchableQuestion(q)) return false;
+  const tokens = tokenize(q);
+  return tokens.some((t) =>
+    [...CASE_TERMS].some((term) => t === term || (t.length >= 5 && (term.startsWith(t) || t.startsWith(term)))),
+  );
 }
 
 function detectIntent(

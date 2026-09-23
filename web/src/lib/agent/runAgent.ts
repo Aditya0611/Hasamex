@@ -2,6 +2,7 @@ import { generateText, stepCountIs } from "ai";
 import { createGroq } from "@ai-sdk/groq";
 import { hasLlmKey, MODEL } from "@/lib/openai";
 import { askAcrossTranscripts } from "@/lib/analysis";
+import { isCaseRelevantQuestion } from "@/lib/retrieve";
 import type { AskResponse, Citation, ExpertId } from "@/lib/types";
 import { citationsFromUnknown, transcriptAgentTools } from "@/lib/agent/tools";
 
@@ -54,6 +55,12 @@ export async function runTranscriptAgent(question: string): Promise<AskResponse>
     return emptyAsk("Please enter a question.");
   }
 
+  if (!isCaseRelevantQuestion(trimmed)) {
+    return emptyAsk(
+      "No supporting evidence found across the transcripts. Ask something about the expert calls — for example adoption, barriers, ROI, or training.",
+    );
+  }
+
   if (!hasLlmKey()) {
     const grounded = await askAcrossTranscripts(trimmed);
     return { ...grounded, usedMode: grounded.usedMode };
@@ -69,10 +76,11 @@ export async function runTranscriptAgent(question: string): Promise<AskResponse>
       tools: transcriptAgentTools,
       system: `You are CallBrief, a tool-calling transcript agent.
 You MUST use tools to gather evidence. Do not invent facts, numbers, or quotes.
+If the user question is small talk or unrelated to robotic-surgery expert calls, do not search. Reply "no evidence".
 
 Always start with tools — preferred order:
-1) get_qa_pair — if the question may match interviewer wording in the calls
-2) search_transcripts — semantic/keyword search (use per expertId if needed so you cover France, Germany, and UK)
+1) get_qa_pair — use the USER question verbatim (do not rewrite it into a guide question)
+2) search_transcripts — semantic/keyword search with the USER question verbatim
 3) verify_citation — for any quote you rely on
 4) grounded_ask — only if the other tools return nothing useful
 

@@ -3,7 +3,12 @@ import fs from "fs";
 import path from "path";
 import { getExpertMeta, loadCaseData } from "./load";
 import { getLlmClient, hasLlmKey, MODEL } from "./openai";
-import { retrieveRelevant, retrieveRelevantHybrid, hasSearchableQuestion } from "./retrieve";
+import {
+  retrieveRelevant,
+  retrieveRelevantHybrid,
+  hasSearchableQuestion,
+  isCaseRelevantQuestion,
+} from "./retrieve";
 import type {
   AnalysisBundle,
   AskResponse,
@@ -699,10 +704,10 @@ export async function askAcrossTranscripts(
     };
   }
 
-  if (!hasSearchableQuestion(trimmed)) {
+  if (!hasSearchableQuestion(trimmed) || !isCaseRelevantQuestion(trimmed)) {
     return {
       answer:
-        "No supporting evidence found across the transcripts. Try a clearer question about the calls.",
+        "No supporting evidence found across the transcripts. Ask something about the expert calls — for example adoption, barriers, ROI, or training.",
       citations: [],
       evidenceFound: false,
       usedMode: "extractive",
