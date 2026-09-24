@@ -5,6 +5,7 @@ import { askAcrossTranscripts } from "@/lib/analysis";
 import { isCaseRelevantQuestion } from "@/lib/retrieve";
 import type { AskResponse, Citation, ExpertId } from "@/lib/types";
 import { citationsFromUnknown, transcriptAgentTools } from "@/lib/agent/tools";
+import { deriveCrossFromCitations } from "@/lib/agent/deriveCrossFromEvidence";
 
 const EXPERT_ORDER: ExpertId[] = ["france", "germany", "uk"];
 
@@ -19,20 +20,23 @@ function pickTopCitations(citations: Citation[]): Citation[] {
   );
 }
 
-/** Build the visible answer only from verified transcript quotes (never model prose). */
-function answerFromCitations(citations: Citation[]): string {
-  return pickTopCitations(citations)
-    .map((c) => `${c.market} (${c.expertName}) · ${c.timestamp}\n${c.quote}`)
-    .join("\n\n");
-}
-
-function groundedResponse(citations: Citation[], mode: AskResponse["usedMode"]): AskResponse {
+function withDerivedCross(
+  citations: Citation[],
+  mode: AskResponse["usedMode"],
+  question: string,
+): AskResponse {
   const top = pickTopCitations(citations);
+  const n = top.length;
   return {
-    answer: answerFromCitations(top),
+    // Short line only — full quotes live in Citations (shown once)
+    answer:
+      n === 0
+        ? "No supporting evidence found across the transcripts."
+        : `Found ${n} transcript quote${n === 1 ? "" : "s"} across the expert calls.`,
     citations: top,
     evidenceFound: top.length > 0,
     usedMode: mode,
+    crossAnalysis: deriveCrossFromCitations(top, question),
   };
 }
 
@@ -42,12 +46,15 @@ function emptyAsk(message: string): AskResponse {
     citations: [],
     evidenceFound: false,
     usedMode: "agent",
+    crossAnalysis: null,
   };
 }
 
 /**
- * Agent-first Ask (Vercel AI SDK + Groq tool calling).
- * Extractive / grounded path is fallback only when the agent cannot run or finds nothing.
+ * Ask flow:
+ * 1) Retrieve transcript evidence (agent tools or grounded ask)
+ * 2) Show exact quotes as the answer (do not invent)
+ * 3) Derive themes / disagreements from those quotes only
  */
 export async function runTranscriptAgent(question: string): Promise<AskResponse> {
   const trimmed = question.trim();
@@ -63,7 +70,10 @@ export async function runTranscriptAgent(question: string): Promise<AskResponse>
 
   if (!hasLlmKey()) {
     const grounded = await askAcrossTranscripts(trimmed);
-    return { ...grounded, usedMode: grounded.usedMode };
+    if (!grounded.evidenceFound) {
+      return emptyAsk("No supporting evidence found across the transcripts.");
+    }
+    return withDerivedCross(grounded.citations, grounded.usedMode, trimmed);
   }
 
   try {
@@ -79,7 +89,7 @@ You MUST use tools to gather evidence. Do not invent facts, numbers, or quotes.
 If the user question is small talk or unrelated to robotic-surgery expert calls, do not search. Reply "no evidence".
 
 Always start with tools — preferred order:
-1) get_qa_pair — use the USER question verbatim (do not rewrite it into a guide question)
+1) get_qa_pair — use the USER question verbatim
 2) search_transcripts — semantic/keyword search with the USER question verbatim
 3) verify_citation — for any quote you rely on
 4) grounded_ask — only if the other tools return nothing useful
@@ -94,7 +104,6 @@ Never write your own summary of what experts said.`,
       (step.toolResults ?? []).map((tr) => ("output" in tr ? tr.output : tr)),
     );
 
-    // Prefer grounded_ask tool payload if the agent used it
     for (const out of toolOutputs) {
       if (
         out &&
@@ -105,20 +114,22 @@ Never write your own summary of what experts said.`,
         Array.isArray((out as AskResponse).citations) &&
         (out as AskResponse).citations.length > 0
       ) {
-        const g = out as AskResponse;
-        return groundedResponse(g.citations, "agent");
+        return withDerivedCross(
+          (out as AskResponse).citations,
+          "agent",
+          trimmed,
+        );
       }
     }
 
     const citations = citationsFromUnknown(toolOutputs);
     if (citations.length > 0) {
-      return groundedResponse(citations, "agent");
+      return withDerivedCross(citations, "agent", trimmed);
     }
 
-    // Agent ran but found nothing — last-resort grounded fallback
     const grounded = await askAcrossTranscripts(trimmed);
     if (grounded.evidenceFound) {
-      return groundedResponse(grounded.citations, "agent");
+      return withDerivedCross(grounded.citations, grounded.usedMode, trimmed);
     }
 
     return emptyAsk("No supporting evidence found across the transcripts.");
@@ -126,7 +137,7 @@ Never write your own summary of what experts said.`,
     console.error("Agent failed, falling back to grounded ask:", error);
     const grounded = await askAcrossTranscripts(trimmed);
     return grounded.evidenceFound
-      ? groundedResponse(grounded.citations, grounded.usedMode)
+      ? withDerivedCross(grounded.citations, grounded.usedMode, trimmed)
       : emptyAsk("No supporting evidence found across the transcripts.");
   }
 }

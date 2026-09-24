@@ -18,7 +18,7 @@ type CasePayload = {
   utterances: Utterance[];
 };
 
-type Tab = "guide" | "themes" | "ask" | "transcripts";
+type Tab = "guide" | "ask" | "transcripts";
 
 const EXPERT_ORDER: ExpertId[] = ["france", "germany", "uk"];
 
@@ -27,7 +27,6 @@ export function AppShell() {
   const [caseData, setCaseData] = useState<CasePayload | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisBundle | null>(null);
   const [loadingCase, setLoadingCase] = useState(true);
-  const [analyzing, setAnalyzing] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [selectedExpert, setSelectedExpert] = useState<ExpertId>("france");
   const [selectedQuestionId, setSelectedQuestionId] = useState<string>("q1");
@@ -80,42 +79,13 @@ export function AppShell() {
     return caseData.utterances.filter((u) => u.expertId === selectedExpert);
   }, [caseData, selectedExpert]);
 
-  async function runAnalysis(force = false) {
-    // Instant seed/cache reload should never lock the UI
-    if (!force) {
-      setError(null);
-      try {
-        const res = await fetch("/api/analyze", { method: "POST" });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || "Analysis failed");
-        setAnalysis(data as AnalysisBundle);
-        setTab("guide");
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Analysis failed");
-      }
-      return;
-    }
-
-    setAnalyzing(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/analyze?force=1", { method: "POST" });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Analysis failed");
-      setAnalysis(data as AnalysisBundle);
-      setTab("guide");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : "Analysis failed");
-    } finally {
-      setAnalyzing(false);
-    }
-  }
-
-  async function runAsk() {
-    const q = askInput.trim();
+  async function runAsk(question?: string) {
+    const q = (question ?? askInput).trim();
     if (!q) return;
+    if (question) setAskInput(question);
     setAsking(true);
     setError(null);
+    setAskResult(null);
     try {
       const res = await fetch("/api/agent", {
         method: "POST",
@@ -130,10 +100,6 @@ export function AppShell() {
     } finally {
       setAsking(false);
     }
-  }
-
-  function openTab(next: Tab) {
-    setTab(next);
   }
 
   function jumpToCitation(citation: Citation) {
@@ -172,21 +138,6 @@ export function AppShell() {
             Analyse 3 expert calls: guide answers, quotes with timestamps, themes, and
             ask-across-transcripts.
           </p>
-          <div className="hero-actions">
-            <button
-              type="button"
-              className="btn primary"
-              onClick={() => runAnalysis(false)}
-              disabled={analyzing}
-            >
-              {analysis ? "Results ready" : "Load results"}
-            </button>
-            {analysis ? (
-              <span className="mode-pill">ready</span>
-            ) : (
-              <span className="mode-pill soft">Loading analysis…</span>
-            )}
-          </div>
           {error ? <p className="error">{error}</p> : null}
         </div>
         <aside className="hero-panel" aria-label="Case overview">
@@ -201,10 +152,6 @@ export function AppShell() {
               </li>
             ))}
           </ul>
-          <p className="panel-note">
-            {caseData.questions.length} interview questions ·{" "}
-            {caseData.utterances.length} timestamped utterances
-          </p>
         </aside>
       </header>
 
@@ -213,7 +160,6 @@ export function AppShell() {
           [
             ["ask", "Ask across calls"],
             ["guide", "Interview guide"],
-            ["themes", "Themes & disagreements"],
             ["transcripts", "Transcripts"],
           ] as const
         ).map(([id, label]) => (
@@ -221,7 +167,7 @@ export function AppShell() {
             key={id}
             type="button"
             className={tab === id ? "tab active" : "tab"}
-            onClick={() => openTab(id)}
+            onClick={() => setTab(id)}
           >
             {label}
           </button>
@@ -229,6 +175,108 @@ export function AppShell() {
       </nav>
 
       <main className="main">
+        {tab === "ask" ? (
+          <section className="panel ask-panel">
+            <h3>Ask across all transcripts</h3>
+            <p className="muted">
+              Ask any question in one box. The agent retrieves transcript quotes first,
+              then shows what experts share or where they differ — only from those quotes.
+            </p>
+            <textarea
+              value={askInput}
+              onChange={(e) => {
+                setAskInput(e.target.value);
+                setAskResult(null);
+              }}
+              rows={3}
+              placeholder="Ask a question across France, Germany, and UK calls…"
+            />
+            <button
+              type="button"
+              className="btn primary"
+              onClick={() => void runAsk()}
+              disabled={asking || !askInput.trim()}
+            >
+              {asking ? "Searching…" : "Ask"}
+            </button>
+            {asking && !askResult ? (
+              <p className="muted">Retrieving transcript evidence…</p>
+            ) : null}
+            {askResult ? (
+              <article className="answer-block">
+                <h4>Transcript evidence</h4>
+                <p className="muted">{askResult.answer}</p>
+                {askResult.citations.length > 0 ? (
+                  <CitationList
+                    citations={askResult.citations}
+                    onJump={jumpToCitation}
+                  />
+                ) : null}
+                {askResult.crossAnalysis ? (
+                  <div className="stack-gap" style={{ marginTop: "1.25rem" }}>
+                    <h4>What they agree on</h4>
+                    <p className="muted">
+                      Shared themes found in the retrieved quotes (not invented).
+                    </p>
+                    {askResult.crossAnalysis.themes.map((theme) => (
+                      <p
+                        key={theme.theme}
+                        className="answer-text"
+                        style={{ whiteSpace: "pre-wrap" }}
+                      >
+                        {theme.summary}
+                      </p>
+                    ))}
+                    <h4>Where they differ</h4>
+                    <p className="muted">
+                      Each point is from that expert’s own quote above.
+                    </p>
+                    <ul className="stance-list">
+                      {askResult.crossAnalysis.disagreements.flatMap((d) =>
+                        d.positions.map((p) => {
+                          const cite = p.citations[0];
+                          return (
+                            <li key={`${d.topic}-${p.expertId}`}>
+                              <strong>{p.market}</strong>
+                              {cite ? (
+                                <>
+                                  {" "}
+                                  <button
+                                    type="button"
+                                    className="chip"
+                                    style={{
+                                      display: "inline",
+                                      padding: "0.1rem 0.45rem",
+                                      fontSize: "0.8rem",
+                                    }}
+                                    onClick={() => jumpToCitation(cite)}
+                                  >
+                                    {cite.timestamp}
+                                  </button>
+                                </>
+                              ) : null}
+                              {": "}
+                              {p.stance.replace(/^\d{1,2}:\d{2}\s*—\s*/, "")}
+                            </li>
+                          );
+                        }),
+                      )}
+                    </ul>
+                    <p className="muted">
+                      Full quotes are listed once under Transcript evidence. Click a
+                      timestamp to jump into the call.
+                    </p>
+                  </div>
+                ) : askResult.evidenceFound ? (
+                  <p className="muted" style={{ marginTop: "1rem" }}>
+                    Need quotes from at least two experts to compare agree / differ.
+                  </p>
+                ) : null}
+              </article>
+            ) : null}
+          </section>
+        ) : null}
+
         {tab === "guide" ? (
           <section className="panel">
             {!analysis ? (
@@ -286,95 +334,6 @@ export function AppShell() {
           </section>
         ) : null}
 
-        {tab === "themes" ? (
-          <section className="panel stack-gap">
-            {!analysis ? (
-              <EmptyState text="Loading themes…" />
-            ) : (
-              <>
-                <p className="muted">What experts share, and where they differ.</p>
-                <div>
-                  <h3>Common themes</h3>
-                  <div className="simple-list">
-                    {analysis.crossAnalysis.themes.map((theme) => (
-                      <article key={theme.theme} className="simple-item">
-                        <h4>{theme.theme}</h4>
-                        <p>{theme.summary}</p>
-                        <CitationList
-                          citations={theme.citations.slice(0, 2)}
-                          onJump={jumpToCitation}
-                        />
-                      </article>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h3>Disagreements</h3>
-                  <div className="simple-list">
-                    {analysis.crossAnalysis.disagreements.map((d) => (
-                      <article key={d.topic} className="simple-item">
-                        <h4>{d.topic}</h4>
-                        <p>{d.summary}</p>
-                        <ul className="stance-list">
-                          {d.positions.map((p) => (
-                            <li key={`${d.topic}-${p.expertId}`}>
-                              <strong>{p.market}:</strong> {trimText(p.stance, 120)}
-                            </li>
-                          ))}
-                        </ul>
-                        <CitationList
-                          citations={d.positions.flatMap((p) => p.citations).slice(0, 3)}
-                          onJump={jumpToCitation}
-                        />
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              </>
-            )}
-          </section>
-        ) : null}
-
-        {tab === "ask" ? (
-          <section className="panel ask-panel">
-            <h3>Ask across all transcripts</h3>
-            <p className="muted">
-              Agent searches the 3 transcripts with tools, then shows exact quotes.
-            </p>
-            <textarea
-              value={askInput}
-              onChange={(e) => {
-                setAskInput(e.target.value);
-                setAskResult(null);
-              }}
-              rows={3}
-              placeholder="Ask a question across France, Germany, and UK calls…"
-            />
-            <button
-              type="button"
-              className="btn primary"
-              onClick={() => void runAsk()}
-              disabled={asking || !askInput.trim()}
-            >
-              {asking ? "Searching…" : "Ask"}
-            </button>
-            {asking && !askResult ? (
-              <p className="muted">Searching transcripts…</p>
-            ) : null}
-            {askResult ? (
-              <article className="answer-block">
-                <p className="answer-text">{askResult.answer}</p>
-                {askResult.citations.length > 0 ? (
-                  <>
-                    <h4>Citations</h4>
-                    <CitationList citations={askResult.citations} onJump={jumpToCitation} />
-                  </>
-                ) : null}
-              </article>
-            ) : null}
-          </section>
-        ) : null}
-
         {tab === "transcripts" ? (
           <section className="panel">
             <div className="expert-switch">
@@ -422,10 +381,4 @@ export function AppShell() {
 
 function EmptyState({ text }: { text: string }) {
   return <p className="empty">{text}</p>;
-}
-
-function trimText(text: string, max: number): string {
-  const clean = text.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, max).replace(/\s+\S*$/, "")}…`;
 }

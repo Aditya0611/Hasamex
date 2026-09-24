@@ -184,6 +184,17 @@ const CASE_TERMS = new Set([
   "utilization",
   "trend",
   "outlook",
+  "theme",
+  "themes",
+  "disagreement",
+  "disagreements",
+  "disagree",
+  "differ",
+  "difference",
+  "differences",
+  "consensus",
+  "common",
+  "agree",
 ]);
 
 const SMALLTALK =

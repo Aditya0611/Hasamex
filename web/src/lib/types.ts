@@ -75,11 +75,13 @@ export type AskResponse = {
   citations: Citation[];
   evidenceFound: boolean;
   usedMode: "rag" | "extractive" | "agent";
+  /** Themes / disagreements derived only from this answer's retrieved citations. */
+  crossAnalysis?: CrossAnalysis | null;
 };
 
 export type AnalysisBundle = {
   generatedAt: string;
-  mode: "llm" | "extractive";
+  mode: "llm" | "extractive" | "agent";
   guideAnswers: GuidedAnswer[];
   crossAnalysis: CrossAnalysis;
 };

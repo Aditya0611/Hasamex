@@ -209,6 +209,11 @@ function buildExtractiveGuideAnswers(): GuidedAnswer[] {
   return guideAnswers;
 }
 
+/** Extractive cross-call themes (no live LLM). Used as agent fallback. */
+export function getExtractiveCrossAnalysis(): CrossAnalysis {
+  return extractiveCross(buildExtractiveGuideAnswers());
+}
+
 function extractiveCross(guideAnswers: GuidedAnswer[]): CrossAnalysis {
   const themes: CrossAnalysis["themes"] = [
     {
