@@ -23,7 +23,7 @@ type Tab = "guide" | "themes" | "ask" | "transcripts";
 const EXPERT_ORDER: ExpertId[] = ["france", "germany", "uk"];
 
 export function AppShell() {
-  const [tab, setTab] = useState<Tab>("guide");
+  const [tab, setTab] = useState<Tab>("ask");
   const [caseData, setCaseData] = useState<CasePayload | null>(null);
   const [analysis, setAnalysis] = useState<AnalysisBundle | null>(null);
   const [loadingCase, setLoadingCase] = useState(true);
@@ -211,9 +211,9 @@ export function AppShell() {
       <nav className="tabs" aria-label="Primary">
         {(
           [
+            ["ask", "Ask across calls"],
             ["guide", "Interview guide"],
             ["themes", "Themes & disagreements"],
-            ["ask", "Ask across calls"],
             ["transcripts", "Transcripts"],
           ] as const
         ).map(([id, label]) => (
